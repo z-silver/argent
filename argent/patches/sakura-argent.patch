@@ -1,0 +1,58 @@
+diff --git a/src/sakura.c b/src/sakura.c
+index d842b3a..7deb685 100644
+--- a/src/sakura.c
++++ b/src/sakura.c
+@@ -117,23 +117,23 @@ const GdkRGBA linux_palette[PALETTE_SIZE] = {
+ 	{1,        1,        1,        1}
+ };
+ 
+-const GdkRGBA solarized_palette[PALETTE_SIZE] = {
+-	{0.027451, 0.211765, 0.258824, 1}, // 0 base02
+-	{0.862745, 0.196078, 0.184314, 1}, // 1 red
+-	{0.521569, 0.600000, 0.000000, 1}, // 2 green
+-	{0.709804, 0.537255, 0.000000, 1}, // 3 yellow
+-	{0.149020, 0.545098, 0.823529, 1}, // 4 blue
+-	{0.827451, 0.211765, 0.509804, 1}, // 5 magenta
+-	{0.164706, 0.631373, 0.596078, 1}, // 6 cyan
+-	{0.933333, 0.909804, 0.835294, 1}, // 7 base2
+-	{0.000000, 0.168627, 0.211765, 1}, // 8 base03 (bg)
+-	{0.796078, 0.294118, 0.086275, 1}, // 9 orange
+-	{0.345098, 0.431373, 0.458824, 1}, // 10 base01
+-	{0.396078, 0.482353, 0.513725, 1}, // 11 base00
+-	{0.513725, 0.580392, 0.588235, 1}, // 12 base0 (fg)
+-	{0.423529, 0.443137, 0.768627, 1}, // 13 violet
+-	{0.576471, 0.631373, 0.631373, 1}, // 14 base1
+-	{0.992157, 0.964706, 0.890196, 1}  // 15 base3
++const GdkRGBA custom_palette[PALETTE_SIZE] = {
++	{0       , 0       , 0       , 1}, // 0 black
++	{0.84374 , 0       , 0.421875, 1}, // 1 red
++	{0.421875, 0.84374 , 0       , 1}, // 2 green
++	{0.84374 , 0.421875, 0       , 1}, // 3 yellow
++	{0       , 0.421875, 0.84374 , 1}, // 4 blue
++	{0.421875, 0       , 0.84374 , 1}, // 5 magenta
++	{0       , 0.84374 , 0.421875, 1}, // 6 cyan
++	{0.84374 , 0.84374 , 0.84374 , 1}, // 7 white
++	{0.492187, 0.492187, 0.492187, 1}, // 8 bright black
++	{0.984375, 0       , 0       , 1}, // 9 bright red
++	{0       , 0.984375, 0       , 1}, // 10 bright green
++	{0.984375, 0.984375, 0       , 1}, // 11 bright yellow
++	{0       , 0       , 0.984375, 1}, // 12 bright blue
++	{0.984375, 0       , 0.984375, 1}, // 13 bright magenta
++	{0       , 0.984375, 0.984375, 1}, // 14 bright cyan
++	{0.984375, 0.984375, 0.984375, 1}  // 15 bright white
+ };
+ 
+ const GdkRGBA nord_palette[PALETTE_SIZE] = {
+@@ -194,9 +194,9 @@ const GdkRGBA rxvt_palette[PALETTE_SIZE] = {
+ 	{1,        1,        1,        1}
+ };
+ 
+-const char *palettes_names[]= {"Solarized", "Tango", "Gruvbox","Nord","Xterm","Linux", "Rxvt", NULL};
+-const GdkRGBA *palettes[] = {solarized_palette, tango_palette, gruvbox_palette, nord_palette, xterm_palette, linux_palette, rxvt_palette, NULL};
+-#define DEFAULT_PALETTE 1 /* Tango palette */
++const char *palettes_names[]= {"Custom", "Tango", "Gruvbox","Nord","Xterm","Linux", "Rxvt", NULL};
++const GdkRGBA *palettes[] = {custom_palette, tango_palette, gruvbox_palette, nord_palette, xterm_palette, linux_palette, rxvt_palette, NULL};
++#define DEFAULT_PALETTE 0 /* Custom palette */
+ 
+ /* Color schemes (fg&bg) for sakura. Each colorset can use a different scheme */
+ struct scheme {

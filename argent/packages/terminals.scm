@@ -5,7 +5,7 @@
   #:use-module (guix packages)
   #:use-module ((guix licenses) #:prefix license:))
 
-(define-public custom-sakura
+(define-public sakura-argent
   (package
     (inherit sakura)
     (name "sakura-argent")
