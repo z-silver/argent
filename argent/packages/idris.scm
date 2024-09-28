@@ -140,14 +140,18 @@ In Idris, types are first-class constructs in the langauge.  This means types
 can be passed as arguments to functions, and returned from functions just like
 any other value, such as numbers, strings, or lists.  This is a small but
 powerful idea, enabling:
-@enumerate
-@item relationships to be expressed between values; for example, that two lists
+@itemize
+@item
+relationships to be expressed between values; for example, that two lists
 have the same length.
-@item assumptions to be made explicit and checked by the compiler.  For
+@item
+assumptions to be made explicit and checked by the compiler.  For
 example, if you assume that a list is non-empty, Idris can ensure this
 assumption always holds before the program is run.
-@item if desired, properties of program behaviour to be formally stated and
-proven.")
+@item
+if desired, properties of program behaviour to be formally stated and
+proven.
+@end itemize")
     (license license:bsd-3)))
 
 (define-public idris2-bootstrap-0.2.1
