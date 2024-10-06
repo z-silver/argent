@@ -14,7 +14,7 @@
 
 (define-public idris2-boot
   (let ((commit "0fb1192cd30ec4747cbc727f26ddbfad515d1363")
-        (revision "0"))
+        (revision "1"))
     (package
       (name "idris2-boot")
       (version (git-version "0.1.1" revision commit))
