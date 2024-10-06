@@ -18,51 +18,53 @@
     (package
       (name "idris2-boot")
       (version (git-version "0.1.1" revision commit))
-      (source (origin
-                (method git-fetch)
-                (uri (git-reference
-                       (url "https://github.com/edwinb/Idris2-boot.git")
-                       (commit commit)))
-                (file-name (git-file-name name version))
-                (sha256
-                   (base32
-                     "1f0b2mb7xahc4mrhbw8vp5b6iv3ci1z7yz7h12i8mnmy3nddpsfn"))))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/edwinb/Idris2-boot")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "1f0b2mb7xahc4mrhbw8vp5b6iv3ci1z7yz7h12i8mnmy3nddpsfn"))))
       (build-system gnu-build-system)
       (native-inputs (list idris))
-      (inputs (list chez-scheme mpc bash))
+      (inputs (list chez-scheme mpc bash-minimal))
       (arguments
-        (list
-          #:test-target "test"
-          ;; Tests fail to compile with the following error:
-          ;; cc: rawSystem: posix_spawnp: does not exist (No such file or directory)
-          #:tests? #f
-          #:phases
-          #~(modify-phases %standard-phases
-              (add-after 'patch-source-shebangs 'patch-more-source-shebangs
-                (lambda _
-                  (substitute* "src/Compiler/Scheme/Chez.idr"
-                    (("^(.*#!)/bin/sh(.*)$" _ prefix suffix)
-                     (string-append prefix
-                                    #$(file-append bash "/bin/sh")
-                                    suffix)))))
-              (replace 'configure
-                (lambda _
-                  (substitute* "config.mk"
-                    (("^CC :=.*$")
-                     (string-append "CC := " #$(cc-for-target))))))
-              (add-before 'build 'set-prefix
-                (lambda _
-                  (setenv "PREFIX" #$output)))
-              (replace 'build
-                (lambda _
-                  ;; Don't run the tests during the build step.
-                  (invoke "make" "idris2boot" "libs" "install-support")))
-              (replace 'install
-                (lambda _
-                  (invoke "make" "install-all"))))))
+       (list
+        #:test-target "test"
+        ;; Tests fail to compile with the following error:
+        ;; cc: rawSystem: posix_spawnp: does not exist (No such file or directory)
+        #:tests? #f
+        #:phases #~(modify-phases %standard-phases
+                     (add-after 'patch-source-shebangs 'patch-more-source-shebangs
+                       (lambda _
+                         (substitute* "src/Compiler/Scheme/Chez.idr"
+                           (("^(.*#!)/bin/sh(.*)$" _ prefix suffix)
+                            (string-append prefix
+                                           #$(file-append bash-minimal "/bin/sh")
+                                           suffix)))))
+                     (replace 'configure
+                       (lambda _
+                         (substitute* "config.mk"
+                           (("^CC :=.*$")
+                            (string-append "CC := "
+                                           #$(cc-for-target))))))
+                     (add-before 'build 'set-prefix
+                       (lambda _
+                         (setenv "PREFIX"
+                                 #$output)))
+                     (replace 'build
+                       (lambda _
+                         ;; Don't run the tests during the build step.
+                         (invoke "make" "idris2boot" "libs" "install-support")))
+                     (replace 'install
+                       (lambda _
+                         (invoke "make" "install-all"))))))
       (home-page "https://github.com/edwinb/Idris2-boot")
-      (synopsis "The bootstrapping version of Idris 2, the successor to Idris")
-      (description "This is the bootstrapping version of Idris 2, the successor
+      (synopsis "Bootstrapping version of Idris 2, the successor to Idris")
+      (description
+       "This is the bootstrapping version of Idris 2, the successor
 to Idris.  Its sole purpose is to build Idris 2 proper.  Most likely, you will
 want to install that directly, unless you're following the bootstrapping path
 from scratch.")
@@ -76,16 +78,17 @@ from scratch.")
             "idris2"
             "idris2-bootstrap"))
     (version version)
-    (source (origin
-              (method git-fetch)
-              (uri (git-reference
-                     (url "https://github.com/idris-lang/Idris2.git")
-                     (commit (string-append "v" version))))
-              (file-name (git-file-name name version))
-              (sha256 (base32 source-hash))))
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+              (url "https://github.com/idris-lang/Idris2")
+              (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256 (base32 source-hash))))
     (build-system gnu-build-system)
     (native-inputs (list chez-scheme input-idris2))
-    (inputs (cons* chez-scheme mpc (if final? '() (list bash))))
+    (inputs (cons* chez-scheme mpc (if final? '() (list bash-minimal))))
     (arguments
       (list
         #:test-target "test"
@@ -105,7 +108,7 @@ from scratch.")
                  (list
                    #~(add-after 'patch-source-shebangs 'patch-more-source-shebangs
                        (lambda _
-                         (define sh #$(file-append bash "/bin/sh"))
+                         (define sh #$(file-append bash-minimal "/bin/sh"))
                          (substitute* "src/Compiler/Scheme/Chez.idr"
                            (("^(.*#!)/bin/sh(.*)$" _ prefix suffix)
                             (string-append prefix sh suffix)))
@@ -126,8 +129,9 @@ from scratch.")
               (lambda _
                 (invoke "make" "all"))))))
     (home-page "https://www.idris-lang.org")
-    (synopsis "A purely functional programming language with first class types")
-    (description "Idris is a programming language designed to encourage
+    (synopsis "Purely functional programming language with first class types")
+    (description
+     "Idris is a programming language designed to encourage
 Type-Driven Development.
 
 In type-driven development, types are tools for constructing programs.  We
