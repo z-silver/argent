@@ -94,8 +94,8 @@ current document, an so on.")
       (license license:lgpl2.1))))
 
 (define-public kak-peneira-filters
-  (let ((commit "ce8cb8459352b4be63ff708cdc31244504fbfd9d")
-        (revision "0"))
+  (let ((commit "b7ff4e344b9ee5f66d55e9c433f309c71ca4b707")
+        (revision "1"))
     (package
       (name "kak-peneira-filters")
       (version (git-version "0.0.0" revision commit))
@@ -103,8 +103,7 @@ current document, an so on.")
         (origin
           (method git-fetch)
           (uri (git-reference
-                 ;; Upstream currently breaks when used as an autoload
-                 (url "https://codeberg.org/z-silver/peneira-filters")
+                 (url "https://codeberg.org/mbauhardt/peneira-filters")
                  (commit commit)))
           (file-name (git-file-name name version))
           (sha256
