@@ -117,3 +117,140 @@ current document, an so on.")
       (synopsis "Additional custom filters for the kakoune plugin gustavo-hms/peneira")
       (description "Additional custom filters for the kakoune plugin gustavo-hms/peneira.")
       (license license:expat))))
+
+(define-public kak-enluarada
+  (let ((commit "a50a78fa8cf1065f83e58a7d06dc38c204027f43")
+        (revision "0"))
+    (package
+      (name "kak-enluarada")
+      (version (git-version "0.0.0" revision commit))
+      (source
+        (origin
+          (method git-fetch)
+          (uri (git-reference
+                 (url "https://github.com/gustavo-hms/enluarada")
+                 (commit commit)))
+          (file-name (git-file-name name version))
+          (sha256
+            (base32 "0naqhzyxr3fy6afalxb1s61lmmi0qy87vwa8pgas75fi73aw91fz"))))
+      (build-system copy-build-system)
+      (propagated-inputs (list kak-luar))
+      (arguments
+        (list #:install-plan
+              #~'(("./" "share/kak/autoload/plugins/enluarada/"))))
+      (home-page "https://github.com/gustavo-hms/enluarada")
+      (synopsis "A collection of Lua scripts for Kakoune")
+      (description "A collection of Lua scripts for Kakoune.
+
+This repository contains many small scripts created using the luar plugin for
+Kakoune.  Since individually they don't make a full-fledged plugin, they are
+put together here.  Despite their simplicity, they are useful after all.
+
+Since these scripts are heterogeneous, providing solutions for different tasks,
+it can happen that you are only interested in a subset of them.  Thus, each
+group of scripts is wrapped inside its own module.  This way you can load only
+those useful for you.  See the README on each subdirectory for more details.")
+      (license license:gpl3))))
+
+(define-public kak-sal
+  (let ((commit "2744bc56dc9d683009498c9e46b11a4c799adf40")
+        (revision "0"))
+    (package
+      (name "kak-sal")
+      (version (git-version "0.0.0" revision commit))
+      (source
+        (origin
+          (method git-fetch)
+          (uri (git-reference
+                 (url "https://github.com/z-silver/sal.kak")
+                 (commit commit)))
+          (file-name (git-file-name name version))
+          (sha256
+            (base32 "136zm1mv6bc7s3fny4ilf1xfb3kqa94gc3yd531sgc1d4mga6dqd"))))
+      (build-system copy-build-system)
+      (arguments
+        (list #:install-plan
+              #~'(("./" "share/kak/autoload/plugins/sal.kak/"))))
+      (home-page "https://github.com/z-silver/sal.kak")
+      (synopsis "Sal syntax highlighting for Kakoune")
+      (description "Syntax highlighting for Sal.
+
+Expect this to change somewhat frequently as the language evolves.")
+      (license license:unlicense))))
+
+(define-public kak-git-mode
+  (let ((commit "a549d5742b1efd85cd122360f7d87689fc649316")
+        (revision "0"))
+    (package
+      (name "kak-git-mode")
+      (version (git-version "0.0.0" revision commit))
+      (source
+        (origin
+          (method git-fetch)
+          (uri (git-reference
+                 (url "https://github.com/jordan-yee/kakoune-git-mode")
+                 (commit commit)))
+          (file-name (git-file-name name version))
+          (sha256
+            (base32 "1xw10287b73rc09f5744bz8lfcbhak52d76b3bzly030z2xda1d2"))))
+      (build-system copy-build-system)
+      (arguments
+        (list #:install-plan
+              #~'(("./" "share/kak/autoload/plugins/kakoune-git-mode/"))))
+      (home-page "https://github.com/jordan-yee/kakoune-git-mode")
+      (synopsis "Kakoune plugin providing improved git interaction")
+      (description "Kakoune plugin providing improved Git interaction.
+
+Mainly, this plugin provides a pre-configured set of mappings for the built-in
+:git commands, with some extended functionaly.")
+      (license license:unlicense))))
+
+(define-public kak-tug
+  (let ((commit "23adaadb795af2d86dcb3daf7af3ebe12e932441")
+        (revision "0"))
+    (package
+      (name "kak-tug")
+      (version (git-version "0.0.0" revision commit))
+      (source
+        (origin
+          (method git-fetch)
+          (uri (git-reference
+                 (url "https://github.com/matthias-margush/tug")
+                 (commit commit)))
+          (file-name (git-file-name name version))
+          (sha256
+            (base32 "0qldzh3gr3m7sa1hibbmf1br5lgiqwn84ggm75iin113zc67avbi"))))
+      (build-system copy-build-system)
+      (arguments
+        (list #:install-plan
+              #~'(("rc/" "share/kak/autoload/plugins/tug/"))))
+      (home-page "https://github.com/matthias-margush/tug")
+      (synopsis "Unix commands for the kakoune editor")
+      (description "Unix commands for the kakoune editor")
+      (license license:unlicense))))
+
+(define-public kak-clipb
+  (let ((commit "b640b2324ef21630753c4b42ddf31207233a98d2")
+        (revision "0"))
+    (package
+      (name "kak-clipb")
+      (version (git-version "0.0.0" revision commit))
+      (source
+        (origin
+          (method git-fetch)
+          (uri (git-reference
+                 (url "https://github.com/NNBnh/clipb.kak")
+                 (commit commit)))
+          (file-name (git-file-name name version))
+          (sha256
+            (base32 "1rs9ilzpl3pp0rm8ljcf5kp1vbw1f7wa62079d2971mg45jj46ib"))))
+      (build-system copy-build-system)
+      (arguments
+        (list #:install-plan
+              #~'(("./" "share/kak/autoload/plugins/clipb.kak/"))))
+      (home-page "https://github.com/NNBnh/clipb.kak")
+      (synopsis "Clipboard managers warper for Kakoune")
+      (description "clipb.kak is a clipboard integration for Kakoune, an
+extremely stripped down fork of Zach Peltzer's Kakboard with some design
+improvements.")
+      (license license:expat))))
