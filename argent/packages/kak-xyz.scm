@@ -253,4 +253,4 @@ Mainly, this plugin provides a pre-configured set of mappings for the built-in
       (description "clipb.kak is a clipboard integration for Kakoune, an
 extremely stripped down fork of Zach Peltzer's Kakboard with some design
 improvements.")
-      (license license:gpl3))))
+      (license (list license:expat license:gpl3))))
