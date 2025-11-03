@@ -9,29 +9,30 @@
 (define-public zig-datetime
   (package
     (name "zig-datetime")
-    (version "0.14.0")
+    (version "0.15.1")
     (source
       (origin
         (method git-fetch)
         (uri (git-reference
-               (url "https://github.com/clickingbuttons/datetime")
-               (commit "8ad66223b061cc527749c2eae650de7a10da765d")))
+               ;; temporarily use non-canonical repository until PR is merged
+               (url "https://github.com/z-silver/datetime")
+               (commit "1c8b1c17182db35f69324acfea94f6ed8143bbbe")))
         (file-name (git-file-name name version))
         (sha256
-          (base32 "150iy4dw1vl344wllblhl2f1ijxl7rhmmmqvf24gyr62xzk4y8rj"))))
+          (base32 "1vbd5xql3p8rhi0pq5qbm4gy2hgb9rrdhqp4h7s27rdyhcq6ijpa"))))
     (build-system zig-build-system)
-    (arguments (list #:zig zig-0.14 #:skip-build? #t))
+    (arguments (list #:zig zig-0.15 #:skip-build? #t))
     (synopsis "Generic Date, Time, and DateTime library.")
     (description "Generic Date, Time, and DateTime library.")
     (home-page "https://github.com/clickingbuttons/datetime")
     (license license:expat)))
 
 (define-public timez
-  (let ((commit "751d31f789ce554f0684c02759c3747101dc3e20")
+  (let ((commit "5400d5efa52b461382960eb30ff033a838ff1d47")
         (revision "0"))
     (package
       (name "timez")
-      (version (git-version "0.0.1" revision commit))
+      (version (git-version "0.0.2" revision commit))
       (source
         (origin
           (method git-fetch)
@@ -40,11 +41,11 @@
                  (commit commit)))
           (file-name (git-file-name name version))
           (sha256
-            (base32 "0v5vxcnc7qczn26lsi7swncg2pf8hcwl2bq4yskfddd4k0cr0a4q"))))
+            (base32 "1pmzb5i5906vgqipdqa078jz3d7w0f0d2pzgw6i4jwl60vs99ng1"))))
       (build-system zig-build-system)
       (arguments
         (list
-          #:zig zig-0.14
+          #:zig zig-0.15
           #:install-source? #f
           #:zig-release-type "small"))
       (inputs (list zig-datetime))
