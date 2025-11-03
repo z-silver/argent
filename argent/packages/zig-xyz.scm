@@ -54,8 +54,8 @@
       (license license:unlicense))))
 
 (define-public poop
-  (let ((commit "e283827410e2caf751ce8f38d2ff5c217e1ce4cd")
-        (revision "0"))
+  (let ((commit "67ab6632c53af751a4d9cfb214ff67ef55fd1ceb")
+        (revision "1"))
     (package
       (name "poop")
       (version (git-version "0.5.0" revision commit))
@@ -67,11 +67,11 @@
                  (commit commit)))
           (file-name (git-file-name name version))
           (sha256
-            (base32 "0ib0rzb0fygbxpaqdigl73mimi5c44rczv95qb3xp2jfk6lavgrc"))))
+            (base32 "0lgcgks8pd92f9gm913rjviaipx3iqsylb9f7r1xjp5axgi676vz"))))
       (build-system zig-build-system)
       (arguments
         (list
-          #:zig zig-0.14
+          #:zig zig-0.15
           #:install-source? #f
           #:zig-release-type "fast"
           #:zig-build-flags ''("-Dstrip")
