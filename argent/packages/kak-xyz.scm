@@ -206,8 +206,8 @@ Mainly, this plugin provides a pre-configured set of mappings for the built-in
       (license license:unlicense))))
 
 (define-public kak-tug
-  (let ((commit "23adaadb795af2d86dcb3daf7af3ebe12e932441")
-        (revision "0"))
+  (let ((commit "8e2e6f0b88dddf4020eb46fd77ec0b43c5849977")
+        (revision "1"))
     (package
       (name "kak-tug")
       (version (git-version "0.0.0" revision commit))
@@ -215,11 +215,12 @@ Mainly, this plugin provides a pre-configured set of mappings for the built-in
         (origin
           (method git-fetch)
           (uri (git-reference
-                 (url "https://github.com/matthias-margush/tug")
+                 ;; Fork. Fixes a small annoyance.
+                 (url "https://github.com/vbauerster/tug")
                  (commit commit)))
           (file-name (git-file-name name version))
           (sha256
-            (base32 "0qldzh3gr3m7sa1hibbmf1br5lgiqwn84ggm75iin113zc67avbi"))))
+            (base32 "1ppb1snhbm53ivw4ka0xcwx3zbw249bmfzvzjr49mxrs9mc6pr32"))))
       (build-system copy-build-system)
       (arguments
         (list #:install-plan
