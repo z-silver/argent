@@ -88,7 +88,7 @@ from scratch.")
        (sha256 (base32 source-hash))))
     (build-system gnu-build-system)
     (native-inputs (list chez-scheme input-idris2))
-    (inputs (cons* chez-scheme mpc (if final? '() (list bash-minimal))))
+    (inputs (list chez-scheme mpc bash-minimal))
     (arguments
       (list
         #:test-target "test"
@@ -103,18 +103,15 @@ from scratch.")
                    "TARGETDIR = ${CURDIR}/build/exec")
                   (("^(.*IDRIS2=)\\S*(\\$\\{TARGET\\}.*)$" _ prefix suffix)
                    (string-append prefix suffix)))))
-            #$@(if final?
-                 '()
-                 (list
-                   #~(add-after 'patch-source-shebangs 'patch-more-source-shebangs
-                       (lambda _
-                         (define sh #$(file-append bash-minimal "/bin/sh"))
-                         (substitute* "src/Compiler/Scheme/Chez.idr"
-                           (("^(.*#!)/bin/sh(.*)$" _ prefix suffix)
-                            (string-append prefix sh suffix)))
-                         (substitute* "src/Compiler/Scheme/Racket.idr"
-                           (("^(.*#!)/bin/sh(.*)$" _ prefix suffix)
-                            (string-append prefix sh suffix)))))))
+            (add-after 'patch-source-shebangs 'patch-more-source-shebangs
+              (lambda _
+                (define sh #$(file-append bash-minimal "/bin/sh"))
+                (substitute* "src/Compiler/Scheme/Chez.idr"
+                  (("^(.*#!)/bin/sh(.*)$" _ prefix suffix)
+                   (string-append prefix sh suffix)))
+                (substitute* "src/Compiler/Scheme/Racket.idr"
+                  (("^(.*#!)/bin/sh(.*)$" _ prefix suffix)
+                   (string-append prefix sh suffix)))))
             (add-before 'build 'set-env-vars
               (lambda _
                 (define chez-path #$(file-append chez-scheme "/bin/scheme"))
@@ -200,11 +197,17 @@ proven.
     #:source-hash "0qxfwsm2gxjxwzni85jb5b4snvjf77knqs9bnd2bqznrfxgxw2sp"
     #:input-idris2 idris2-bootstrap-0.6.0))
 
-(define-public idris2-0.7.0
+(define-public idris2-bootstrap-0.8.0
   (make-idris2
-    #:version "0.7.0"
-    #:source-hash "0qxfwsm2gxjxwzni85jb5b4snvjf77knqs9bnd2bqznrfxgxw2sp"
-    #:input-idris2 idris2-bootstrap-0.7.0
+    #:version "0.8.0"
+    #:source-hash "1vbxgrnpn18cr7k16y40sv7n08qjjrqxr1q0ij9x8f30z944vw9j"
+    #:input-idris2 idris2-bootstrap-0.7.0))
+
+(define-public idris2-0.8.0
+  (make-idris2
+    #:version "0.8.0"
+    #:source-hash "1vbxgrnpn18cr7k16y40sv7n08qjjrqxr1q0ij9x8f30z944vw9j"
+    #:input-idris2 idris2-bootstrap-0.8.0
     #:final? #t))
 
-(define-public idris2 idris2-0.7.0)
+(define-public idris2 idris2-0.8.0)
