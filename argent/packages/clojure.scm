@@ -161,12 +161,36 @@ Similar to ojo (but simpler, unlimited watchers allowed and directory recursive)
     (build-system clojure-build-system)
     (propagated-inputs (list clojure-init clojure-clj-reload clojure-dirwatch))
     (arguments
-     (list #:doc-dirs `'()
-           ;; Lib has no tests yet.
-           #:tests? #f))
+     (list
+      #:doc-dirs `(list)
+      ;; Lib has no tests yet.
+      #:tests? #f))
     (synopsis "Reloaded workflow using clj-reload and init")
     (description
      "clj-reinit is to clj-reload/init as integrant-repl is to tools.namespace/integrant.
 
 Except it's way cooler.")
+    (license license:unlicense)))
+
+(define-public clojure-just-route
+  (package
+    (name "clojure-just-route")
+    (version "0.1.1")
+    (home-page "https://github.com/z-silver/just-route")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url home-page)
+             (commit version)))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "1j62b1z2iyl5kip47da1ssjaa3ymkxrz52jh99kp5lixr4b4vq2v"))))
+    (build-system clojure-build-system)
+    (arguments
+     (list
+      #:doc-dirs `(list)
+      #:tests? #f))
+    (synopsis "Dead simple Ring router")
+    (description "A Ring router in half a screen of code.")
     (license license:unlicense)))
