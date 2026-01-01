@@ -20,9 +20,7 @@
                 "1fwd7dlbinlm3shjkcji35ahxjgk9a1y0v00mm84fc3gx6a19kb5"))))
     (build-system clojure-build-system)
     (arguments
-      `(#:doc-dirs '()
-        #:source-dirs (list "src/")
-        #:test-dirs (list "test/" "src/")))
+      `(#:doc-dirs '()))
     (synopsis "A data structure for representing dependency graphs in Clojure")
     (description "This library provides a basic implementation of a directed
 acyclic graph (DAG) data structure, represented as a pair of maps.  It is
@@ -50,7 +48,6 @@ such as keywords, symbols, or strings.")
     (propagated-inputs (list clojure-dependency))
     (arguments
       `(#:doc-dirs (list "doc/")
-        #:source-dirs (list "src/")
         #:test-dirs (list "test/" "src/")))
     (synopsis "Dependency injection a la carte")
     (description "Init is a small Clojure framework for application
@@ -76,7 +73,6 @@ Dagger 2, Guice, Spring and CDI.")
     (build-system clojure-build-system)
     (arguments
       `(#:doc-dirs '()
-        #:source-dirs (list "src/")
         ;; FIXME: make tests actually work.
         #:tests? #f
         #:test-dirs (list "test/" "src/" "fixtures/keep_test/"
@@ -116,9 +112,7 @@ nothing to do with Leiningen, Maven, JAR files, or repositories.")
                 "06qrzg9mq2ca2lylsnjhb3a73zg2f1xzras5mydl6z8ib2y5fixy"))))
     (build-system clojure-build-system)
     (arguments
-      `(#:doc-dirs '()
-        #:source-dirs (list "src/")
-        #:test-dirs (list "test/")))
+      `(#:doc-dirs '()))
     (synopsis "A Clojure directory watcher, wrapping the JDK 7 java.nio.file.WatchService.")
     (description "Watch directories for changes.
 
@@ -145,8 +139,8 @@ Similar to ojo (but simpler, unlimited watchers allowed and directory recursive)
     (propagated-inputs (list clojure-init clojure-clj-reload clojure-dirwatch))
     (arguments
       `(#:doc-dirs '()
-        #:source-dirs (list "src/")
-        #:test-dirs '()))
+        ;; Lib has no tests yet.
+        #:tests? #f))
     (synopsis "Reloaded workflow using clj-reload and init")
     (description "clj-reinit is to clj-reload/init as integrant-repl is to tools.namespace/integrant.
 
