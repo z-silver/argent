@@ -5,7 +5,8 @@
   #:use-module (guix gexp)
   #:use-module (guix git-download)
   #:use-module (guix build-system copy)
-  #:use-module ((guix licenses) #:prefix license:))
+  #:use-module ((guix licenses)
+                #:prefix license:))
 
 (define-public kak-rainbow
   (let ((commit "9c3d0aa62514134ee5cb86e80855d9712c4e8c4b")
@@ -14,21 +15,23 @@
       (name "kak-rainbow-bodhizafa")
       (version (git-version "0.0.0" revision commit))
       (source
-        (origin
-          (method git-fetch)
-          (uri (git-reference
-                 (url "https://github.com/Bodhizafa/kak-rainbow")
-                 (commit commit)))
-          (file-name (git-file-name name version))
-          (sha256
-            (base32 "0mqghysiwi1h0hx96c7bq0a16yrxh65f3v8bqqn5bh9x1zh2l9mg"))))
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/Bodhizafa/kak-rainbow")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "0mqghysiwi1h0hx96c7bq0a16yrxh65f3v8bqqn5bh9x1zh2l9mg"))))
       (build-system copy-build-system)
       (arguments
-        (list #:install-plan
-              #~'(("./" "share/kak/autoload/plugins/kak-rainbow/"))))
+       (list
+        #:install-plan
+        #~'(("./" "share/kak/autoload/plugins/kak-rainbow/"))))
       (home-page "https://github.com/Bodhizafa/kak-rainbow")
       (synopsis "Cursor-centered rainbow highlighter for kakoune")
-      (description "A cursor-centered rainbow highlighter for kakoune.  Handles
+      (description
+       "A cursor-centered rainbow highlighter for kakoune.  Handles
 different styles of enclosing characters independently, so adding parens
 doesn't change the colors of braces, etc.")
       (license license:expat))))
@@ -40,22 +43,24 @@ doesn't change the colors of braces, etc.")
       (name "kak-luar")
       (version (git-version "0.0.0" revision commit))
       (source
-        (origin
-          (method git-fetch)
-          (uri (git-reference
-                 (url "https://github.com/gustavo-hms/luar")
-                 (commit commit)))
-          (file-name (git-file-name name version))
-          (sha256
-            (base32 "1y6bksqvlsj8wx42figfc60qk2d9vs6kij4mzaxv5gywrzfiwghz"))))
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/gustavo-hms/luar")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "1y6bksqvlsj8wx42figfc60qk2d9vs6kij4mzaxv5gywrzfiwghz"))))
       (build-system copy-build-system)
       (propagated-inputs (list lua fennel))
       (arguments
-        (list #:install-plan
-              #~'(("./" "share/kak/autoload/plugins/luar/"))))
+       (list
+        #:install-plan
+        #~'(("./" "share/kak/autoload/plugins/luar/"))))
       (home-page "https://github.com/gustavo-hms/luar")
       (synopsis "Script Kakoune using Lua")
-      (description "Luar is a minimalist plugin to script Kakoune using either Lua
+      (description
+       "Luar is a minimalist plugin to script Kakoune using either Lua
 or Fennel.  It's not designed to expose Kakoune's internals like Vis or Neovim
 do.  Instead, it's conceived with Kakoune's extension model in mind.  It does
 so by defining a sole lua command which can execute whatever string is passed
@@ -72,22 +77,24 @@ run some logic inside Kakoune.")
       (name "kak-peneira")
       (version (git-version "0.0.0" revision commit))
       (source
-        (origin
-          (method git-fetch)
-          (uri (git-reference
-                 (url "https://github.com/gustavo-hms/peneira")
-                 (commit commit)))
-          (file-name (git-file-name name version))
-          (sha256
-            (base32 "0hkra2fnrk7bj6rry4nc6sld1wc36001hyirkagsfs9x9gx5k45d"))))
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/gustavo-hms/peneira")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "0hkra2fnrk7bj6rry4nc6sld1wc36001hyirkagsfs9x9gx5k45d"))))
       (build-system copy-build-system)
       (propagated-inputs (list kak-luar))
       (arguments
-        (list #:install-plan
-              #~'(("./" "share/kak/autoload/plugins/peneira/"))))
+       (list
+        #:install-plan
+        #~'(("./" "share/kak/autoload/plugins/peneira/"))))
       (home-page "https://github.com/gustavo-hms/peneira")
       (synopsis "A fuzzy finder crafted for Kakoune")
-      (description "Peneira is a fuzzy finder for the Kakoune editor.  You can
+      (description
+       "Peneira is a fuzzy finder for the Kakoune editor.  You can
 use it to write custom filters for candidates lists.  You can also use its
 built-in filters, that allow you to select files in a directory, symbols in the
 current document, an so on.")
@@ -100,22 +107,25 @@ current document, an so on.")
       (name "kak-peneira-filters")
       (version (git-version "0.0.0" revision commit))
       (source
-        (origin
-          (method git-fetch)
-          (uri (git-reference
-                 (url "https://codeberg.org/mbauhardt/peneira-filters")
-                 (commit commit)))
-          (file-name (git-file-name name version))
-          (sha256
-            (base32 "03g24pr8hm5vs5la541fh6vzfrhg0g999vn2xsm9n3z7zbxg44n3"))))
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://codeberg.org/mbauhardt/peneira-filters")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "03g24pr8hm5vs5la541fh6vzfrhg0g999vn2xsm9n3z7zbxg44n3"))))
       (build-system copy-build-system)
       (propagated-inputs (list kak-peneira))
       (arguments
-        (list #:install-plan
-              #~'(("./" "share/kak/autoload/plugins/peneira-filters/"))))
+       (list
+        #:install-plan
+        #~'(("./" "share/kak/autoload/plugins/peneira-filters/"))))
       (home-page "https://codeberg.org/mbauhardt/peneira-filters")
-      (synopsis "Additional custom filters for the kakoune plugin gustavo-hms/peneira")
-      (description "Additional custom filters for the kakoune plugin gustavo-hms/peneira.")
+      (synopsis
+       "Additional custom filters for the kakoune plugin gustavo-hms/peneira")
+      (description
+       "Additional custom filters for the kakoune plugin gustavo-hms/peneira.")
       (license license:expat))))
 
 (define-public kak-enluarada
@@ -125,22 +135,24 @@ current document, an so on.")
       (name "kak-enluarada")
       (version (git-version "0.0.0" revision commit))
       (source
-        (origin
-          (method git-fetch)
-          (uri (git-reference
-                 (url "https://github.com/gustavo-hms/enluarada")
-                 (commit commit)))
-          (file-name (git-file-name name version))
-          (sha256
-            (base32 "0naqhzyxr3fy6afalxb1s61lmmi0qy87vwa8pgas75fi73aw91fz"))))
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/gustavo-hms/enluarada")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "0naqhzyxr3fy6afalxb1s61lmmi0qy87vwa8pgas75fi73aw91fz"))))
       (build-system copy-build-system)
       (propagated-inputs (list kak-luar))
       (arguments
-        (list #:install-plan
-              #~'(("./" "share/kak/autoload/plugins/enluarada/"))))
+       (list
+        #:install-plan
+        #~'(("./" "share/kak/autoload/plugins/enluarada/"))))
       (home-page "https://github.com/gustavo-hms/enluarada")
       (synopsis "A collection of Lua scripts for Kakoune")
-      (description "A collection of Lua scripts for Kakoune.
+      (description
+       "A collection of Lua scripts for Kakoune.
 
 This repository contains many small scripts created using the luar plugin for
 Kakoune.  Since individually they don't make a full-fledged plugin, they are
@@ -159,21 +171,23 @@ those useful for you.  See the README on each subdirectory for more details.")
       (name "kak-sal")
       (version (git-version "0.0.0" revision commit))
       (source
-        (origin
-          (method git-fetch)
-          (uri (git-reference
-                 (url "https://github.com/z-silver/sal.kak")
-                 (commit commit)))
-          (file-name (git-file-name name version))
-          (sha256
-            (base32 "136zm1mv6bc7s3fny4ilf1xfb3kqa94gc3yd531sgc1d4mga6dqd"))))
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/z-silver/sal.kak")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "136zm1mv6bc7s3fny4ilf1xfb3kqa94gc3yd531sgc1d4mga6dqd"))))
       (build-system copy-build-system)
       (arguments
-        (list #:install-plan
-              #~'(("./" "share/kak/autoload/plugins/sal.kak/"))))
+       (list
+        #:install-plan
+        #~'(("./" "share/kak/autoload/plugins/sal.kak/"))))
       (home-page "https://github.com/z-silver/sal.kak")
       (synopsis "Sal syntax highlighting for Kakoune")
-      (description "Syntax highlighting for Sal.
+      (description
+       "Syntax highlighting for Sal.
 
 Expect this to change somewhat frequently as the language evolves.")
       (license license:unlicense))))
@@ -185,21 +199,23 @@ Expect this to change somewhat frequently as the language evolves.")
       (name "kak-git-mode")
       (version (git-version "0.0.0" revision commit))
       (source
-        (origin
-          (method git-fetch)
-          (uri (git-reference
-                 (url "https://github.com/jordan-yee/kakoune-git-mode")
-                 (commit commit)))
-          (file-name (git-file-name name version))
-          (sha256
-            (base32 "1xw10287b73rc09f5744bz8lfcbhak52d76b3bzly030z2xda1d2"))))
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/jordan-yee/kakoune-git-mode")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "1xw10287b73rc09f5744bz8lfcbhak52d76b3bzly030z2xda1d2"))))
       (build-system copy-build-system)
       (arguments
-        (list #:install-plan
-              #~'(("./" "share/kak/autoload/plugins/kakoune-git-mode/"))))
+       (list
+        #:install-plan
+        #~'(("./" "share/kak/autoload/plugins/kakoune-git-mode/"))))
       (home-page "https://github.com/jordan-yee/kakoune-git-mode")
       (synopsis "Kakoune plugin providing improved git interaction")
-      (description "Kakoune plugin providing improved Git interaction.
+      (description
+       "Kakoune plugin providing improved Git interaction.
 
 Mainly, this plugin provides a pre-configured set of mappings for the built-in
 :git commands, with some extended functionaly.")
@@ -212,19 +228,20 @@ Mainly, this plugin provides a pre-configured set of mappings for the built-in
       (name "kak-tug")
       (version (git-version "0.0.0" revision commit))
       (source
-        (origin
-          (method git-fetch)
-          (uri (git-reference
-                 ;; Fork. Fixes a small annoyance.
-                 (url "https://github.com/vbauerster/tug")
-                 (commit commit)))
-          (file-name (git-file-name name version))
-          (sha256
-            (base32 "1ppb1snhbm53ivw4ka0xcwx3zbw249bmfzvzjr49mxrs9mc6pr32"))))
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               ;; Fork. Fixes a small annoyance.
+               (url "https://github.com/vbauerster/tug")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "1ppb1snhbm53ivw4ka0xcwx3zbw249bmfzvzjr49mxrs9mc6pr32"))))
       (build-system copy-build-system)
       (arguments
-        (list #:install-plan
-              #~'(("rc/" "share/kak/autoload/plugins/tug/"))))
+       (list
+        #:install-plan
+        #~'(("rc/" "share/kak/autoload/plugins/tug/"))))
       (home-page "https://github.com/matthias-margush/tug")
       (synopsis "Unix commands for the kakoune editor")
       (description "Unix commands for the kakoune editor")
@@ -237,21 +254,23 @@ Mainly, this plugin provides a pre-configured set of mappings for the built-in
       (name "kak-clipb")
       (version (git-version "0.0.0" revision commit))
       (source
-        (origin
-          (method git-fetch)
-          (uri (git-reference
-                 (url "https://github.com/NNBnh/clipb.kak")
-                 (commit commit)))
-          (file-name (git-file-name name version))
-          (sha256
-            (base32 "1rs9ilzpl3pp0rm8ljcf5kp1vbw1f7wa62079d2971mg45jj46ib"))))
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://github.com/NNBnh/clipb.kak")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "1rs9ilzpl3pp0rm8ljcf5kp1vbw1f7wa62079d2971mg45jj46ib"))))
       (build-system copy-build-system)
       (arguments
-        (list #:install-plan
-              #~'(("./" "share/kak/autoload/plugins/clipb.kak/"))))
+       (list
+        #:install-plan
+        #~'(("./" "share/kak/autoload/plugins/clipb.kak/"))))
       (home-page "https://github.com/NNBnh/clipb.kak")
       (synopsis "Clipboard managers warper for Kakoune")
-      (description "clipb.kak is a clipboard integration for Kakoune, an
+      (description
+       "clipb.kak is a clipboard integration for Kakoune, an
 extremely stripped down fork of Zach Peltzer's Kakboard with some design
 improvements.")
       (license (list license:expat license:gpl3)))))

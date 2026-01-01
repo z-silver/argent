@@ -5,7 +5,8 @@
   #:use-module (guix packages)
   #:use-module (guix git-download)
   #:use-module (guix utils)
-  #:use-module ((guix licenses) #:prefix license:))
+  #:use-module ((guix licenses)
+                #:prefix license:))
 
 (define-public quadro
   (let ((commit "c31f10a5dfa4f3e2858fadc90b75c3f5f4e4b0a6")
@@ -26,9 +27,11 @@
       (inputs (list libx11 libpng))
       (arguments
        `(#:tests? #f
-         #:make-flags (list (string-append "CC=" ,(cc-for-target))
+         #:make-flags (list (string-append "CC="
+                                           ,(cc-for-target))
                             (string-append "PREFIX=" %output))
-         #:phases (modify-phases %standard-phases (delete 'configure))))
+         #:phases (modify-phases %standard-phases
+                    (delete 'configure))))
       (home-page "https://github.com/thalting/quadro")
       (synopsis "Screenshot tool for X11")
       (description "A suckless-style screenshot tool for X11.")

@@ -2,7 +2,8 @@
   #:use-module (guix build-system go)
   #:use-module (guix download)
   #:use-module (guix git-download)
-  #:use-module ((guix licenses) #:prefix license:)
+  #:use-module ((guix licenses)
+                #:prefix license:)
   #:use-module (guix packages)
   #:use-module (guix utils)
   #:use-module (gnu packages golang-build)
@@ -71,19 +72,17 @@ defaults.  It is suitable for both interactive use and scripting.")
     ;; From the README:
     ;; All source files use the BSD 2-clause license (see LICENSE), except for
     ;; the following:
-
+    
     ;; Files in pkg/diff and pkg/rpc are released under the BSD 3-clause
     ;; license, since they are derived from Go's source code. See
     ;; pkg/diff/LICENSE and pkg/rpc/LICENSE.
-
+    
     ;; Files in pkg/persistent and its subdirectories are released under EPL
     ;; 1.0, since they are partially derived from Clojure's source code. See
     ;; pkg/persistent/LICENSE.
-
+    
     ;; Files in pkg/md/spec are released under the Creative Commons CC-BY-SA
     ;; 4.0 license, since they are derived from the CommonMark spec. See
     ;; pkg/md/spec/LICENSE.
-    (license (list license:bsd-2
-                   license:bsd-3
-                   license:epl1.0
+    (license (list license:bsd-2 license:bsd-3 license:epl1.0
                    license:cc-by-sa4.0))))
