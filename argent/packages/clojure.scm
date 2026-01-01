@@ -21,7 +21,8 @@
         (base32 "1fwd7dlbinlm3shjkcji35ahxjgk9a1y0v00mm84fc3gx6a19kb5"))))
     (build-system clojure-build-system)
     (arguments
-     (list #:doc-dirs `'()))
+     (list
+      #:doc-dirs `(list)))
     (synopsis "A data structure for representing dependency graphs in Clojure")
     (description
      "This library provides a basic implementation of a directed
@@ -49,8 +50,9 @@ such as keywords, symbols, or strings.")
     (build-system clojure-build-system)
     (propagated-inputs (list clojure-dependency))
     (arguments
-     (list #:doc-dirs `(list "doc/")
-           #:test-dirs `(list "test/" "src/")))
+     (list
+      #:doc-dirs `(list "doc/")
+      #:test-dirs `(list "test/" "src/")))
     (synopsis "Dependency injection a la carte")
     (description
      "Init is a small Clojure framework for application
@@ -75,38 +77,39 @@ Dagger 2, Guice, Spring and CDI.")
         (base32 "1mv853qdflyh1dykgr2w49n68z6r6kqvafm3lwpd5c7fdwwli3va"))))
     (build-system clojure-build-system)
     (arguments
-     (list #:doc-dirs `'()
-           ;; FIXME: make tests actually work.
-           #:tests? #f
-           #:test-dirs `(list "test/" "src/" "fixtures/keep_test/"
-                              "fixtures/core_test/")
-           #:test-exclude `'(two-nses-second two-nses
-                                             split
-                                             o
-                                             n
-                                             no-unload
-                                             m
-                                             l
-                                             i
-                                             j
-                                             k
-                                             f
-                                             a
-                                             g
-                                             h
-                                             d
-                                             c
-                                             e
-                                             double
-                                             b
-                                             clj-reload.dependency
-                                             clj-reload.keep-custom
-                                             clj-reload.keep-defprotocol
-                                             clj-reload.keep-defrecord
-                                             clj-reload.keep-deftype
-                                             clj-reload.keep-vars
-                                             clj-reload.keep-downstream
-                                             clj-reload.keep-upstream)))
+     (list
+      #:doc-dirs `(list)
+      ;; FIXME: make tests actually work.
+      #:tests? #f
+      #:test-dirs `(list "test/" "src/" "fixtures/keep_test/"
+                         "fixtures/core_test/")
+      #:test-exclude `'(two-nses-second two-nses
+                                        split
+                                        o
+                                        n
+                                        no-unload
+                                        m
+                                        l
+                                        i
+                                        j
+                                        k
+                                        f
+                                        a
+                                        g
+                                        h
+                                        d
+                                        c
+                                        e
+                                        double
+                                        b
+                                        clj-reload.dependency
+                                        clj-reload.keep-custom
+                                        clj-reload.keep-defprotocol
+                                        clj-reload.keep-defrecord
+                                        clj-reload.keep-deftype
+                                        clj-reload.keep-vars
+                                        clj-reload.keep-downstream
+                                        clj-reload.keep-upstream)))
     (synopsis "Smarter way to reload Clojure code")
     (description
      "Smarter way to reload Clojure code.  Clj-Reload tracks
@@ -133,7 +136,8 @@ nothing to do with Leiningen, Maven, JAR files, or repositories.")
         (base32 "06qrzg9mq2ca2lylsnjhb3a73zg2f1xzras5mydl6z8ib2y5fixy"))))
     (build-system clojure-build-system)
     (arguments
-     (list #:doc-dirs `'()))
+     (list
+      #:doc-dirs `(list)))
     (synopsis
      "A Clojure directory watcher, wrapping the JDK 7 java.nio.file.WatchService.")
     (description
