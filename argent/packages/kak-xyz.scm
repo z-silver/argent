@@ -1,5 +1,6 @@
 (define-module (argent packages kak-xyz)
   #:use-module (gnu packages lua)
+  #:use-module (gnu packages python)
   #:use-module (guix build-system gnu)
   #:use-module (guix packages)
   #:use-module (guix gexp)
@@ -283,3 +284,37 @@ Mainly, this plugin provides a pre-configured set of mappings for the built-in
 extremely stripped down fork of Zach Peltzer's Kakboard with some design
 improvements.")
       (license (list license:expat license:gpl3)))))
+
+(define-public kak-repl-buffer
+  (let ((commit "49dadb8e679bd3d14efd2c609cda46d16c2a2424")
+        (revision "0"))
+    (package
+      (name "kak-repl-buffer")
+      (version (git-version "0.0.0" revision commit))
+      (source
+       (origin
+         (method git-fetch)
+         (uri (git-reference
+               (url "https://gitlab.com/Screwtapello/kakoune-repl-buffer")
+               (commit commit)))
+         (file-name (git-file-name name version))
+         (sha256
+          (base32 "0fjib9dppf3qbdmjf3ifxf4nrbljqpjsk4zacx993vvrbagwy301"))))
+      (build-system copy-build-system)
+      (inputs (list python))
+      (arguments
+       (list
+        #:install-plan
+        #~'(("./" "share/kak/autoload/plugins/kakoune-repl-buffer/"))))
+      (home-page "https://gitlab.com/Screwtapello/kakoune-repl-buffer")
+      (synopsis "Kakoune plugin to run a REPL inside a Kakoune buffer")
+      (description
+       "A REPL is a \"read, evaluate, print\" loop; a tool that takes commands
+or calculations from the user, processes them, then displays the results.  Common
+REPL tools include command-line shells, calculators, database query tools, and
+programming languages.
+
+This plugin gives Kakoune the ability to run a REPL inside a buffer: you can
+type what you want, but also use Kakoune's search and copy/paste features, and
+even go back and edit the log to add annotations or delete unwanted output.")
+      (license (list license:gpl3)))))
