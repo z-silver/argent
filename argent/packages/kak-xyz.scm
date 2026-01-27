@@ -38,7 +38,7 @@ doesn't change the colors of braces, etc.")
 
 (define-public kak-luar
   (let ((commit "e32ac89fdc43e5dbd8750d55cbcf1aea66d3ebdf")
-        (revision "0"))
+        (revision "7"))
     (package
       (name "kak-luar")
       (version (git-version "0.0.0" revision commit))
@@ -52,9 +52,18 @@ doesn't change the colors of braces, etc.")
          (sha256
           (base32 "1y6bksqvlsj8wx42figfc60qk2d9vs6kij4mzaxv5gywrzfiwghz"))))
       (build-system copy-build-system)
-      (propagated-inputs (list lua fennel))
+      (inputs (list lua fennel))
       (arguments
        (list
+        #:phases
+        #~(modify-phases %standard-phases
+            (add-before 'patch-source-shebangs 'use-dependencies
+               (lambda _
+                 (substitute* "luar.kak"
+                   (("^(.* str luar_interpreter )lua\n$" _ prefix)
+                    (string-append prefix #$(file-append lua "/bin/lua") "\n"))
+                   (("^(.* exec )fennel( .*)$" _ prefix suffix)
+                    (string-append prefix #$(file-append fennel "/bin/fennel") suffix))))))
         #:install-plan
         #~'(("./" "share/kak/autoload/plugins/luar/"))))
       (home-page "https://github.com/gustavo-hms/luar")
