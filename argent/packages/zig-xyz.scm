@@ -32,11 +32,12 @@
     (license license:expat)))
 
 (define-public timez
-  (let ((commit "5400d5efa52b461382960eb30ff033a838ff1d47")
+  (let ((version "0.0.3")
+        (commit "646e3002ce4afc913fb5996e7d89056c88cd660a")
         (revision "0"))
     (package
       (name "timez")
-      (version (git-version "0.0.2" revision commit))
+      (version (git-version version revision commit))
       (source
        (origin
          (method git-fetch)
@@ -45,7 +46,7 @@
                (commit commit)))
          (file-name (git-file-name name version))
          (sha256
-          (base32 "1pmzb5i5906vgqipdqa078jz3d7w0f0d2pzgw6i4jwl60vs99ng1"))))
+          (base32 "193cacmf1f3k2vrmikskin2rc3lzxmmnb898pk0m43vcls7qj76x"))))
       (build-system zig-build-system)
       (arguments
        (list
