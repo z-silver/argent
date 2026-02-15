@@ -1,9 +1,11 @@
 (define-module (argent packages kak-xyz)
+  #:use-module (gnu packages documentation)
   #:use-module (gnu packages lua)
   #:use-module (gnu packages python)
   #:use-module (guix build-system gnu)
   #:use-module (guix packages)
   #:use-module (guix gexp)
+  #:use-module (guix utils)
   #:use-module (guix git-download)
   #:use-module (guix build-system copy)
   #:use-module ((guix licenses)
@@ -318,3 +320,39 @@ This plugin gives Kakoune the ability to run a REPL inside a buffer: you can
 type what you want, but also use Kakoune's search and copy/paste features, and
 even go back and edit the log to add annotations or delete unwanted output.")
       (license (list license:gpl3)))))
+
+(define-public rep
+  (package
+    (name "rep")
+    (version "0.2.3")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://github.com/eraserhd/rep")
+             (commit (string-append "v" version))))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32 "1za9piyjkp3h29f815rabmwc00flvizbd05f6skpz8pcyvzbda3w"))))
+    (build-system gnu-build-system)
+    (native-inputs (list asciidoc))
+    (arguments
+     (list
+       #:tests? #f ; TODO: The test suite uses Clojure.
+       #:make-flags #~(list (string-append "CC=" #$(cc-for-target))
+                            (string-append "PREFIX=" %output))
+       #:phases #~(modify-phases %standard-phases
+                    (delete 'configure)
+                    (add-before 'install 'fix-prefix
+                       (lambda _
+                         (substitute* "Makefile"
+                           (("\\$\\(prefix\\)") "$(PREFIX)")))))))
+    (home-page "https://github.com/eraserhd/rep")
+    (synopsis "Single-shot nREPL client designed for shell invocation")
+    (description
+     "rep connects to a running nREPL server, sends a bit of code, and prints the result.
+
+Unlike other nREPL clients, rep does not try to maintain a persistent connection,
+meaning that thread-local variables and bindings like *e and *1 will not persist
+across invocations of rep.")
+    (license (list license:epl1.0))))
