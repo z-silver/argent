@@ -82,34 +82,7 @@ Dagger 2, Guice, Spring and CDI.")
       ;; FIXME: make tests actually work.
       #:tests? #f
       #:test-dirs `(list "test/" "src/" "fixtures/keep_test/"
-                         "fixtures/core_test/")
-      #:test-exclude `'(two-nses-second two-nses
-                                        split
-                                        o
-                                        n
-                                        no-unload
-                                        m
-                                        l
-                                        i
-                                        j
-                                        k
-                                        f
-                                        a
-                                        g
-                                        h
-                                        d
-                                        c
-                                        e
-                                        double
-                                        b
-                                        clj-reload.dependency
-                                        clj-reload.keep-custom
-                                        clj-reload.keep-defprotocol
-                                        clj-reload.keep-defrecord
-                                        clj-reload.keep-deftype
-                                        clj-reload.keep-vars
-                                        clj-reload.keep-downstream
-                                        clj-reload.keep-upstream)))
+                         "fixtures/core_test/")))
     (synopsis "Smarter way to reload Clojure code")
     (description
      "Smarter way to reload Clojure code.  Clj-Reload tracks
